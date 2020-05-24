@@ -5,16 +5,15 @@ TEST_STR = "123456789"
 #out: "987654321"
 def print_reverse(str_):
     #hint: use while loop
-   revercedString=[]
-   index = len(TEST_STR) #calculate index lenght 
-   while index > 0:
-       revercedString += TEST_STR[ index - 1 ] #saving the value for the reverced string??? seem wrong 
-       index = index - 1 # decrementing by 1
-       print(revercedString) # prinitng shit....
-   
-   
+    revercedString=[]
+    s = str()
+    index = len(TEST_STR) #calculate index lenght #---- > use function argument (ex. str_) , not global value TEST_STR
+    while index > 0:
+        revercedString += TEST_STR[ index - 1 ] #saving the value for the reverced string??? seem wrong 
+        index = index - 1 # decrementing by 1
+        s += str_[index]
+    print(s)
 
-   pass
 
 
 #write a function that prints all odd characters in the test string 
