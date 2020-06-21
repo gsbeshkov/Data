@@ -1,0 +1,2 @@
+ install qt5-qtquickcontro  installed at  2019-12-10 15:15 
+ install qt5-qtwebkit       installed at  2019-12-10 15:15 
