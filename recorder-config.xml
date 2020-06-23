@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Config xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../schema/recorder-config.xsd"
+        version="1.0" >
+<FrameData
+    header="32"
+    channels="32"
+    samplesPerChan="16"
+/>
+
+<HotSwap
+    timeBased="disabled"
+    maxSize="512MB"
+    interval="1" /> 
+    
+<QAudioCapture
+    device="alsa:default"
+    sampleRate="16000"
+    bitRate="16"
+    chans="1"
+    quality="medium"
+/>
+
+<Wave samplesPerFrame="16000"
+     bitsPerSec="16"
+     fmtLength="16"
+     audioFormat="1"
+     channels="1"
+     endiness="LE"
+     />
+
+<Peek
+    enabled="true"
+    size="10"
+/>
+<Paths
+    records="records"
+    logs="logs"
+    />
+<!-- only if mahcine mic is used and the plugin is loaded -->
+
+<Record
+    timestamp="enabled"
+    hasNumericConvention="true"
+    files="1"
+    />
+
+<!-- done: setups transport from here -->
+<Network transport="tcp"
+         port="1234"
+         />
+
+<!-- name of file, path and timestamp appended and speed of the logging -->
+<Log
+    name="recorder.log"
+    timestamp="enabled"
+    speed="1000"
+/>
+
+<LogServer
+    port="6666"
+    />
+
+<!-- if we want to report to a host a hearbeat -->
+<Heartbeat
+    timeout="2000"
+    port="5678"
+    host="127.0.0.1"
+    enabled="false"
+    />
+
+<!-- Plugin
+     name: of the plugin that will be refered in the manager
+     order: of the execution of multiple plugins are applied
+     enabled: or disabled: do we have to use the plugin
+     path: absolute path or the one in LD_PATH
+-->
+
+<!-- alsarecorder -->
+
+<!-- This is an alsa sample capture device, not a recorder, it captures from
+mic, then passes down to the chain. -->
+
+<Plugin
+    name="alsarec"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_7_0_GCC_64bit-Debug/alsa-rec/libalsa-rec.so"
+    conf=""
+    />
+<Plugin
+    name="udp-streamer"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/udp-streamer/libudp-streamer.so"
+    conf=""
+    />
+<Plugin
+    name="producer"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/test-producer/libtest-producer.so"
+    conf=""
+    />
+    
+<Plugin
+    name="dtmf"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/DFT/libDFT.so"
+    conf="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/DFT/dft-config.xml"
+    />
+
+<!-- checksum generator -->
+<Plugin
+    name="md5-checksum"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/MD5/libMD5Generator.so"
+/>
+
+<Plugin
+    name="rec"
+    order="1"
+    enabled="true"
+    path="/home/ilian/btel-repo/build-recd2-Desktop_Qt_5_8_0_GCC_64bit-Debug/recorder/librecorder.so"
+    conf=""
+    />
+
+</Config>
+
